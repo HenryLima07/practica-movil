@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import com.example.laboratorio_03.data.Todo
 import java.time.LocalDate
+import kotlin.random.Random
 
 @RequiresApi(Build.VERSION_CODES.O)
 class TodoViewModel : ViewModel() {
@@ -25,7 +26,7 @@ class TodoViewModel : ViewModel() {
         dateFor: LocalDate
     ) {
         val newTodo = Todo(
-            id = todos.size + 1,
+            id = Random.nextInt(0, 10000),
             title = title,
             description = description,
             color = color,
@@ -44,6 +45,10 @@ class TodoViewModel : ViewModel() {
         if (index != -1) {
             todos[index] = todos[index].copy(isDone = !todos[index].isDone)
         }
+    }
+
+    fun removeTodo(todoId: Int) {
+        todos.removeIf { it.id == todoId }
     }
 
     fun changeDialogState() {

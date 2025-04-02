@@ -56,7 +56,9 @@ fun HomeScreen(
         }
     ) { innerPadding ->
         LazyColumn(
-            modifier = modifier.padding(innerPadding).fillMaxWidth(),
+            modifier = modifier
+                .padding(innerPadding)
+                .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             if (viewModel.todos.isEmpty()) {
@@ -65,7 +67,12 @@ fun HomeScreen(
                 }
             } else {
                 items(viewModel.todos) {
-                    TodoCard(it) {
+                    TodoCard(
+                        todo = it,
+                        onDelete = { id ->
+                            viewModel.removeTodo(id)
+                        }
+                    ) {
                         viewModel.changeStatus(it.id)
                     }
                     Spacer(modifier = Modifier.height(8.dp))
