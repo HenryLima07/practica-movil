@@ -8,6 +8,7 @@ import java.time.LocalDate
 data class Todo(
     val id: Int,
     val title: String,
+    val description: String = "",
     val priority: Int,
     val color: Color,
     val timestamp: LocalDate,

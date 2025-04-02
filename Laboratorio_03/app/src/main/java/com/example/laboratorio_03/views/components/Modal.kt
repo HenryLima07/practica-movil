@@ -40,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import com.example.laboratorio_03.ui.theme.Blue
@@ -53,10 +54,11 @@ import java.time.ZoneId
 @Composable
 fun Modal(
     onDismiss: () -> Unit,
-    onConfirm: (title: String, color: Color, priority: Int, dateFor: String) -> Unit,
+    onConfirm: (title: String, description: String, color: Color, priority: Int, dateFor: String) -> Unit,
 ) {
 
     var title by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
     var priority by remember { mutableStateOf(1) }
     var color by remember { mutableStateOf(Color.Red) }
     val datePickerState = rememberDatePickerState()
@@ -79,6 +81,13 @@ fun Modal(
                 value = title,
                 onValueChange = { title = it },
                 label = { Text(text = "Titulo") },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(1.dp))
+            OutlinedTextField(
+                value = description,
+                onValueChange = { description = it },
+                label = { Text(text = "Descripcion") },
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -130,6 +139,7 @@ fun Modal(
                 Button(onClick = {
                     onConfirm(
                         title,
+                        description,
                         color,
                         priority,
                         selectedDate

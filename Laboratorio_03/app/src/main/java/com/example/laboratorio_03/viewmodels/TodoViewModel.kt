@@ -17,10 +17,17 @@ class TodoViewModel : ViewModel() {
 
     var openDialog by mutableStateOf(false)
 
-    fun addTodo(title: String, color: Color, priority: Int, dateFor: LocalDate) {
+    fun addTodo(
+        title: String,
+        description: String,
+        color: Color,
+        priority: Int,
+        dateFor: LocalDate
+    ) {
         val newTodo = Todo(
             id = todos.size + 1,
             title = title,
+            description = description,
             color = color,
             priority = priority,
             timestamp = LocalDate.now(),

@@ -75,9 +75,10 @@ fun HomeScreen(
         if (viewModel.openDialog)
             Modal(
                 onDismiss = { viewModel.changeDialogState() },
-                onConfirm = { title, color, priority, dateFor ->
+                onConfirm = { title, description, color, priority, dateFor ->
                     viewModel.addTodo(
                         title = title,
+                        description = description,
                         color = color,
                         priority = priority,
                         dateFor = LocalDate.parse(dateFor)
