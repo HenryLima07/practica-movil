@@ -36,13 +36,14 @@ import com.agarcia.myfirstandroidapp.data.model.Movie
 import com.agarcia.myfirstandroidapp.ui.components.MovieBottomSheet
 import com.agarcia.myfirstandroidapp.ui.components.MovieItem
 import com.agarcia.myfirstandroidapp.ui.components.MoviePoster
+import com.agarcia.myfirstandroidapp.ui.screens.UpComming.CommentedMoviesViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieListScreen(
     onMovieClick: (Int) -> Unit = {},
     viewModel: MovieListViewModel = viewModel(factory = MovieListViewModel.Factory),
-    commentedMoviesViewModel: CommentedMoviesViewModel
+    commentedMoviesViewModel: CommentedMoviesViewModel = viewModel(factory = CommentedMoviesViewModel.Factory)
 ) {
     val movies by viewModel.movies.collectAsState()
     val loading by viewModel.loading.collectAsState()

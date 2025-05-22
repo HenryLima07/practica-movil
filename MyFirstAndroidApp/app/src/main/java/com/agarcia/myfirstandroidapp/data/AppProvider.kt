@@ -5,6 +5,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.agarcia.myfirstandroidapp.data.database.AppDatabase
+import com.agarcia.myfirstandroidapp.data.repository.CommentedMovies.CommentedMovieRepository
+import com.agarcia.myfirstandroidapp.data.repository.CommentedMovies.CommentedMovieRepositoryImpl
 import com.agarcia.myfirstandroidapp.data.repository.FavoriteMovie.FavoriteMovieRepository
 import com.agarcia.myfirstandroidapp.data.repository.FavoriteMovie.FavoriteMovieRepositoryImpl
 import com.agarcia.myfirstandroidapp.data.repository.Settings.UserPreferencesRepository
@@ -14,17 +16,27 @@ private const val USER_PREFERENCE_NAME = "user_preferences"
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = USER_PREFERENCE_NAME)
 
 class AppProvider(context: Context) {
-  private val appDatabase = AppDatabase.getDatabase(context)
-  private val favoriteMovieDao = appDatabase.favoriteMovieDao()
-  private val favoriteMovieRepository: FavoriteMovieRepository = FavoriteMovieRepositoryImpl(favoriteMovieDao)
+    private val appDatabase = AppDatabase.getDatabase(context)
+    private val favoriteMovieDao = appDatabase.favoriteMovieDao()
+    private val commentedMovieDao = appDatabase.commentedMovieDao()
 
-  private val userPreferenceRepository: UserPreferencesRepository = UserPreferencesRepositoryImpl(context.dataStore)
+    private val favoriteMovieRepository: FavoriteMovieRepository =
+        FavoriteMovieRepositoryImpl(favoriteMovieDao)
+    private val commentedMovieRepository: CommentedMovieRepository =
+        CommentedMovieRepositoryImpl(commentedMovieDao)
 
-  fun provideFavoriteMovieRepository() : FavoriteMovieRepository {
-    return favoriteMovieRepository
-  }
+    private val userPreferenceRepository: UserPreferencesRepository =
+        UserPreferencesRepositoryImpl(context.dataStore)
 
-  fun provideUserPreferenceRepository() : UserPreferencesRepository {
-    return userPreferenceRepository
-  }
+    fun provideFavoriteMovieRepository(): FavoriteMovieRepository {
+        return favoriteMovieRepository
+    }
+
+    fun provideCommentedMovieRepository(): CommentedMovieRepository {
+        return commentedMovieRepository
+    }
+
+    fun provideUserPreferenceRepository(): UserPreferencesRepository {
+        return userPreferenceRepository
+    }
 }

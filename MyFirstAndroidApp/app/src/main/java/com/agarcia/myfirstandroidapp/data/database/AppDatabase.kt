@@ -4,16 +4,20 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.agarcia.myfirstandroidapp.data.database.dao.CommentedMovieDao
 import com.agarcia.myfirstandroidapp.data.database.dao.FavoriteMovieDao
+import com.agarcia.myfirstandroidapp.data.database.entities.CommentMovieEntity
 import com.agarcia.myfirstandroidapp.data.database.entities.FavoriteMovieEntity
 
 @Database(
-  entities = [FavoriteMovieEntity::class],
-  version = 1,
+  entities = [FavoriteMovieEntity::class, CommentMovieEntity::class],
+  version = 2,
   exportSchema = false
 )
 abstract class AppDatabase: RoomDatabase() {
   abstract fun favoriteMovieDao(): FavoriteMovieDao
+  abstract fun commentedMovieDao(): CommentedMovieDao
+
 
   companion object {
     @Volatile

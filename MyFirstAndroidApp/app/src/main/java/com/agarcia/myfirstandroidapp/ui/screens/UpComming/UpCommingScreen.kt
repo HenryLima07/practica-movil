@@ -18,13 +18,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.agarcia.myfirstandroidapp.ui.components.CommentedMovieItem
-import com.agarcia.myfirstandroidapp.ui.screens.MovieList.CommentedMoviesViewModel
+import com.agarcia.myfirstandroidapp.ui.screens.UpComming.CommentedMoviesViewModel
 
 @Composable
 fun UpComming(
-    commentedMoviesViewModel: CommentedMoviesViewModel
+    commentedMoviesViewModel: CommentedMoviesViewModel = viewModel(factory = CommentedMoviesViewModel.Factory)
 ) {
-    val commentedMovies by commentedMoviesViewModel.commentedMovies.collectAsState()
+    val commentedMovies by commentedMoviesViewModel.commentedMovies.collectAsState(emptyList())
+
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
