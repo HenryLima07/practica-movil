@@ -15,13 +15,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.falconteam.laboratorio_5.navigation.RootNavigation
+import com.falconteam.laboratorio_5.screens.auth.AuthViewModel
 import com.falconteam.laboratorio_5.ui.theme.Laboratorio5Theme
 import com.falconteam.laboratorio_5.utils.BlogsitoViewModel
+import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
-    private val viewModel = BlogsitoViewModel()
+    private val blogViewModel = BlogsitoViewModel()
+    private val authViewModel = AuthViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         setContent {
             Laboratorio5Theme {
@@ -29,8 +33,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    blogViewModel.connectWSS(Random.nextInt(1000, 9999).toString())
                     RootNavigation(
-                        viewModel = viewModel
+                        blogViewModel = blogViewModel,
+                        authViewModel = authViewModel
                     )
                 }
             }

@@ -7,18 +7,24 @@ import androidx.room.Query
 import com.falconteam.laboratorio_5.data.database.Entity.Post
 import kotlinx.coroutines.flow.Flow
 
+
 @Dao
 interface PostDao {
-    @Query("SELECT * FROM posts")
-    fun getAllPosts(): Flow<List<Post>>
+    @Query("SELECT * FROM table_post")
+    fun observeAll(): Flow<List<Post>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPost(post: Post)
+    suspend fun insertAllPosts(listPostEntity: List<Post>)
 
-    @Query("UPDATE posts SET title = :title, description = :description WHERE id = :postId")
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPost(postEntity: Post)
+
+    @Query("UPDATE table_post SET title = :title, description = :description WHERE id = :postId")
     suspend fun updateSelected(title: String, description: String, postId: String)
 
-    @Query("DELETE FROM posts WHERE id = :postId")
+    @Query("DELETE FROM table_post WHERE id = :postId")
     suspend fun deletePostById(postId: String)
 
+    @Query("DELETE FROM table_post")
+    suspend fun deleteAllPosts()
 }

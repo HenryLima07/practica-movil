@@ -2,7 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.devtools.ksp)
+
     kotlin("kapt")
+    alias(libs.plugins.kotlin.compose) apply false
+
 }
 
 android {
@@ -64,6 +67,13 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.java.websocket)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.gson)
+    implementation(libs.converter.gson)
+
     annotationProcessor(libs.androidx.room.compiler)
     kapt(libs.androidx.room.compiler)
     testImplementation(libs.junit)
@@ -73,4 +83,6 @@ dependencies {
 //    androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
 //    debugImplementation(libs.androidx.ui.test.manifest)
+
+
 }
