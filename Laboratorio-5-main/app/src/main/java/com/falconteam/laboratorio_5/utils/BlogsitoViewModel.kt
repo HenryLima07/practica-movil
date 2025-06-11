@@ -22,8 +22,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.JsonObject
 import java.net.URI
+import com.google.gson.JsonObject
+
+
 
 sealed class ValidationEvent {
     data object Success: ValidationEvent()
