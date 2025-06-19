@@ -1,0 +1,37 @@
+site_name: Pericolandia
+sites_description: Un sitio sobre el cuidado de los peces de acuario
+site_author: Perico Autor yo Henry
+
+theme:
+  logo: img/T520.webp
+  name: material
+  palette:
+    primary: teal
+    accent: light-green
+  features:
+    - navigation.tabs
+    - navigation.sections
+
+nav:
+  - Inicio: index.md
+  - Especies: navegacion/especies.md
+  - Cuidados: navegacion/cuidados.md
+  - Sobre: navegacion/sobre.md
+
+plugins:
+  - tags
+
+markdown_extensions:
+  - admonition
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.details
+  - pymdownx.superfences
+  - toc:
+      permalink: "#"
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
